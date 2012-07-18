@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "certificate_generator"
   gem.require_paths = ["lib"]
   gem.version       = CertificateGenerator::VERSION
+  
+  gem.add_development_dependency("rspec")  
 end

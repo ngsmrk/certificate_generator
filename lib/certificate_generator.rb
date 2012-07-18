@@ -1,5 +1,3 @@
 require "certificate_generator/version"
-
-module CertificateGenerator
-  # Your code goes here...
-end
+require "certificate_generator/base"
+require "certificate_generator/ca_certificate_generator"

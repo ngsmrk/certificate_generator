@@ -17,12 +17,12 @@ describe CertificateGenerator::CACertificateGenerator do
     end
     
     it 'the subject is set correctly' do
-      expected_subject = "/C=GB/ST=London/L=London/O=XBridge Ltd/OU=Tech/CN=#{@cname}/emailAddress=systems@xbridge.com"
+      expected_subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@cname}/emailAddress=ngsmrk@gmail.com"
       @ca_cert.subject.to_s.should == expected_subject
     end
     
     it 'the issuer is set correctly' do
-      expected_issuer = "/C=GB/ST=London/L=London/O=XBridge Ltd/OU=Tech/CN=#{@cname}/emailAddress=systems@xbridge.com"
+      expected_issuer = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@cname}/emailAddress=ngsmrk@gmail.com"
       @ca_cert.issuer.to_s.should == expected_issuer
     end   
     

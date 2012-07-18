@@ -9,7 +9,7 @@ module CertificateGenerator
       key = OpenSSL::PKey::RSA.new(2048)
 
       cert = OpenSSL::X509::Certificate.new
-      subject = "/C=GB/ST=London/L=London/O=XBridge Ltd/OU=Tech/CN=#{cname}/emailAddress=systems@xbridge.com"
+      subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{cname}/emailAddress=ngsmrk@gmail.com"
       parsed_subject = OpenSSL::X509::Name.parse(subject)
       cert.subject = parsed_subject
 

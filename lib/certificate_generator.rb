@@ -1,3 +1,4 @@
 require "certificate_generator/version"
 require "certificate_generator/base"
 require "certificate_generator/ca_certificate_generator"
+require "certificate_generator/self_signed_certificate_generator"

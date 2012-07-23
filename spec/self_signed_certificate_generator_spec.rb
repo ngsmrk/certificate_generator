@@ -10,8 +10,8 @@ describe CertificateGenerator::SelfSignedCertificateGenerator do
       
       output_path = '/tmp'
       
-      @ca_cname = "CA"
-      ca_cert, ca_key = CertificateGenerator::CACertificateGenerator.new.generate_ca_cert @ca_cname, output_path      
+      @expected_ca_subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=CA/emailAddress=ngsmrk@gmail.com"
+      ca_cert, ca_key = CertificateGenerator::CACertificateGenerator.new.generate_ca_cert @expected_ca_subject, output_path
       
       @cname = "my.server"
       output_path = '/tmp'
@@ -25,8 +25,7 @@ describe CertificateGenerator::SelfSignedCertificateGenerator do
     end
     
     it 'the issuer is set correctly' do
-      expected_issuer = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@ca_cname}/emailAddress=ngsmrk@gmail.com"
-      @cert.issuer.to_s.should == expected_issuer
+      @cert.issuer.to_s.should == @expected_ca_subject
     end   
     
     it 'the serial is set correctly' do
@@ -58,8 +57,8 @@ describe CertificateGenerator::SelfSignedCertificateGenerator do
 
        output_path = '/tmp'
 
-       @ca_cname = "CA"
-       ca_cert, ca_key = CertificateGenerator::CACertificateGenerator.new.generate_ca_cert @ca_cname, output_path
+       @expected_ca_subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=CA/emailAddress=ngsmrk@gmail.com"
+       ca_cert, ca_key = CertificateGenerator::CACertificateGenerator.new.generate_ca_cert @expected_ca_subject, output_path
 
        @cname = "my.server"
        output_path = '/tmp'
@@ -73,8 +72,7 @@ describe CertificateGenerator::SelfSignedCertificateGenerator do
      end
 
      it 'the issuer is set correctly' do
-       expected_issuer = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@ca_cname}/emailAddress=ngsmrk@gmail.com"
-       @cert.issuer.to_s.should == expected_issuer
+       @cert.issuer.to_s.should == @expected_ca_subject
      end
 
      it 'the serial is set correctly' do

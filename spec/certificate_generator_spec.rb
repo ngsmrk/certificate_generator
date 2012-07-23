@@ -10,20 +10,18 @@ describe CertificateGenerator::CACertificateGenerator do
       
       generator = CertificateGenerator::CACertificateGenerator.new
       
-      @cname = "CA"
       output_path = '/tmp'
-      @ca_cert, @key = generator.generate_ca_cert @cname, output_path
+      @expected_subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=CA/emailAddress=ngsmrk@gmail.com"      
+      @ca_cert, @key = generator.generate_ca_cert @expected_subject, output_path
       
     end
     
     it 'the subject is set correctly' do
-      expected_subject = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@cname}/emailAddress=ngsmrk@gmail.com"
-      @ca_cert.subject.to_s.should == expected_subject
+      @ca_cert.subject.to_s.should == @expected_subject
     end
     
     it 'the issuer is set correctly' do
-      expected_issuer = "/C=GB/ST=London/L=London/O=Acme Inc/OU=Tech/CN=#{@cname}/emailAddress=ngsmrk@gmail.com"
-      @ca_cert.issuer.to_s.should == expected_issuer
+      @ca_cert.issuer.to_s.should == @expected_subject
     end   
     
     it 'the serial is set correctly' do

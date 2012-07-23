@@ -23,11 +23,11 @@ module CertificateGenerator
 
     end   
       
-    def save_cert_and_key (cert, key, output_dir)
+    def save_cert_and_key (cert, key, output_dir, prefix = '')
     
       FileUtils.mkdir_p("#{output_dir}")
-      File.open("/#{output_dir}/cert.pem", "w") { |f| f.write(cert.to_pem) }
-      File.open("/#{output_dir}/key.pem", "w") { |f| f.write(key.to_pem) }
+      File.open("#{output_dir}/cert.pem", "w") { |f| f.write(cert.to_pem) }
+      File.open("#{output_dir}/key.pem", "w") { |f| f.write(key.to_pem) }
     
     end     
     

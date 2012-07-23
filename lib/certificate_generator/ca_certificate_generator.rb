@@ -2,14 +2,21 @@ module CertificateGenerator
 
   class CACertificateGenerator < Base
 
-    def generate_ca_cert (cname, output_dir)
+    def generate_ca_cert (subject, output_dir)
 
-      cert, key = generate_core_cert cname, 0
-      cert.issuer  = cert.subject
+      key = OpenSSL::PKey::RSA.new(2048)
+
+      cert = OpenSSL::X509::Certificate.new
+      cert.subject = cert.issuer = OpenSSL::X509::Name.parse(subject)
+
+      cert.not_before = Time.now
+      cert.not_after = Time.now + (3600*24*365) # add a year
+      cert.public_key = key.public_key
+      cert.serial = 0
+      cert.version = 2
 
       ef = OpenSSL::X509::ExtensionFactory.new
-      ef.subject_certificate = cert
-      ef.issuer_certificate  = cert
+      ef.subject_certificate = ef.issuer_certificate = cert
 
       cert.extensions = [
         ef.create_extension("basicConstraints","CA:TRUE"),
@@ -18,7 +25,7 @@ module CertificateGenerator
 
       cert.sign key, OpenSSL::Digest::SHA1.new
 
-      save_cert_and_key cert, key, output_dir
+      save_cert_and_key cert, key, output_dir, 'ca'
 
       return cert, key
 
